@@ -1,5 +1,4 @@
-def main() -> None:
-    print("Hello from autorewardbot!")
+from .test import main
 
 if __name__ == "__main__":
     main()
