@@ -9,4 +9,5 @@ driver:webdriver.Edge = webdriver.Edge()    # Opens the edge window
 
 def main():
     console.print(f"[bold green] {title} [/bold green] \n [bold yellow] created by MakeMeFifi [/bold yellow]")
+    console.print(f"[bold white] checking for JSON data : [/bold] ")
 
