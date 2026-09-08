@@ -9,5 +9,5 @@ wheels/
 # Virtual environments
 .venv
 
-#private Data
-Cookies.json
+#private Cookies
+src/edge_profile
