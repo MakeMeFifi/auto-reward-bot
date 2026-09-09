@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "humancursor>=1.1.5",
     "pyfiglet>=1.0.4",
     "rich>=15.0.0",
     "selenium>=4.48.0",
