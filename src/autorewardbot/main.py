@@ -1,3 +1,4 @@
+from autorewardbot.bingExplore import doBingExplore
 from xml.dom.minidom import Element
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -13,8 +14,8 @@ TODO:
     2. Automating
 
 Reward Goals:
-    1. Search streak
-    2. set Streak
+    1. Search streak (done)
+    2. set Streak (done)
     3.bing explore
     4. more options
     5. Dashboard free points
@@ -40,7 +41,7 @@ cursor:WebCursor = WebCursor(driver)
 
 
 def main():
-    console.print(f"[bold green] {title} [/bold green] \n [bold yellow] created by MakeMeFifi [/bold yellow]")
+    console.print(f"[bold green] {title} [/bold green]\n [bold yellow]-created by MakeMeFifi [/bold yellow]")
     console.print("[bold green] opening reward page [/bold green]")
     if not PATH.exists():
         console.print("[bold red]Youre not Logged in, please log in your Microsoft Account and Press Enter after youre done [/bold red]")
@@ -50,10 +51,10 @@ def main():
 
     #beginning with daily tasks
     console.print("[bold white] [1] [/bold white][bold blue] - beginning with doing the daily tasks [/bold blue]")
-    cursor.click_on(driver.find_element(By.ID, "react-aria-_R_3dalav5t6bslbH1_"))
+    cursor.click_on(driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div/main/section[1]/div/div[2]/div/div/button[3]"))
     getAllDailyTasks(driver,cursor)
-    console.print("[bold green] Daily tasks done! [/bold green]")
-
+    console.print("[bold green] Daily tasks done! [/bold green] \n[bold white] [2] [/bold white] [bold blue] - doing now the daily Bing explore Tasks [/bold blue]")
+    doBingExplore(driver,cursor)
     #debug
     input()
 
