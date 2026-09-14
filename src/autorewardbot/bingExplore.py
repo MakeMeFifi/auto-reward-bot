@@ -24,9 +24,27 @@ def doBingExplore(driver:webdriver.Edge, cursor:WebCursor)->None:
 
 
 def get_search_query(contex:list[WebElement])->str:
-    response :ChatResponse = chat(model="deepseek-r1:1.5b",messages=[{
-        'role' : 'user',
-        'content': f'ok erstelle mir einen suchanfragen text zum thema "{contex[1].text}". Gebe nur die auchanfrage text OHNE weitere erklärungen oder gedanken weg. Ignoriere dabei die anfragen von mir davor. Denke nicht zu viel nach. Suche selber aber nicht dabei, sondern gebe nur den suchtext an ohne dabei selber dannach zu suchen.'
-    }])
+    prompt = f"""Wandle den Text in einen kurzen Bing-Suchbegriff um.
 
-    return(response.message.content)
+    Text: Suchen Sie auf Bing nach atemberaubendem Schmuck für jeden Anlass
+    Suchbegriff: schmuck für jeden anlass kaufen
+
+    Text: Finde heraus wie das Wetter morgen in München wird
+    Suchbegriff: wetter morgen münchen
+
+    Text: Überprüfen Sie wer gestern das Champions League Spiel gewonnen hat
+    Suchbegriff: gewinner champions league gestern
+
+    Text: {contex[1].text}
+    Suchbegriff:"""
+
+    response: ChatResponse = chat(
+        model="qwen2.5:0.5b",
+        messages=[{'role': 'user', 'content': prompt}],
+        options={'temperature': 0.1}  # Wichtig: niedrige Temperatur verhindert Halluzinationen
+    )
+
+    # Sauberes Auslesen der ersten Zeile + Entfernen von Restzeichen
+    suchbegriff = response.message.content.strip().split('\n')[0].replace('"', '').replace("'", "").strip()
+
+    return suchbegriff
